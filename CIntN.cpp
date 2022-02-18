@@ -1,4 +1,5 @@
 #include "CIntN.hpp"
+#include "CIntN0.hpp"
 
 CIntN::CIntN(int64_t x){
     if(x < 0) sign_ = 0;
@@ -47,12 +48,12 @@ CIntN::CIntN(const CIntN& n){
 
 CIntN& CIntN::operator=(const CIntN& n){
     if(this == &n) return *this;
-    CIntN copy = n;
+    CIntN0 copy = n;
     swap(copy);
     return *this;
 }
 CIntN& CIntN::operator=(const std::string& s){
-    CIntN temp(s);
+    CIntN0 temp(s);
     swap(temp);
     return *this;
 }
@@ -63,8 +64,8 @@ void CIntN::swap(CIntN& n){
     std::swap(sign_, n.sign_);
 }
     
-void CIntN::print(const std::string& file_name){
-    std::ofstream out(file_name, std::ios_base::app);
+void CIntN::print_to_file(){
+    std::ofstream out(fileName_, std::ios_base::app);
     if(!out){
         std::cout << "Error! Cannot open file!\n";
         return;
@@ -89,6 +90,10 @@ size_t CIntN::get_N() const{
 void CIntN::new_sign(char sgn){
     if(sgn == '+') sign_ = 1;
     else sign_ = 0;
+}
+
+void CIntN::updateFile(const std::string& fileName){
+    fileName_ = fileName;
 }
 
 CIntN::~CIntN(){

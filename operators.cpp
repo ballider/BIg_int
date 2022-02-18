@@ -1,13 +1,14 @@
 #include "CIntN.hpp"
+#include "CIntN0.hpp"
 
 CIntN& CIntN::operator+=(const CIntN& n){
     if(sign_ != n.sign_){
         if(sign_ == 1){
-            CIntN temp = n;
+            CIntN0 temp = n;
             temp.new_sign('+');
             return *this -= temp;
         }else{
-            CIntN temp = n;
+            CIntN0 temp = n;
             temp.new_sign('-');
             return *this -= temp;
         }
@@ -66,23 +67,18 @@ CIntN& CIntN::operator+=(const CIntN& n){
 }
 
 CIntN& CIntN::operator++(){
-    return *this += 1;
-}
-
-CIntN CIntN::operator++(int){
-    CIntN copy = *this;
-    ++*this;
-    return copy;
+    CIntN0 unit = 1;
+    return *this += unit;
 }
 
 CIntN& CIntN::operator-=(const CIntN& n){
     if(sign_ == 1 && n.sign_ == 0){
-        CIntN t = n;
+        CIntN0 t = n;
         t.new_sign('+');
         return *this += t;
     }
     if(sign_ == 0 && n.sign_ == 1){
-        CIntN t = n;
+        CIntN0 t = n;
         t.new_sign('-');
         return *this += t;
     }
@@ -116,7 +112,7 @@ CIntN& CIntN::operator-=(const CIntN& n){
         else sgn = 1;
     }
 
-    CIntN temp = n;
+    CIntN0 temp = n;
     if(n.N_ > N_) swap(temp);
     if(n.N_ == N_){
         for(size_t q = 0; q < N_; ++q){
@@ -183,23 +179,18 @@ CIntN& CIntN::operator-=(const CIntN& n){
 }
 
 CIntN& CIntN::operator--(){
-    return *this -= 1;
+    CIntN0 unit = 1;
+    return *this -= unit;
 }
 
-CIntN CIntN::operator--(int){
-    CIntN copy = *this;
-    --*this;
-    return copy;
-}
-
-CIntN operator+(const CIntN& a, const CIntN& b){
-    CIntN sum = a;
+CIntN0 operator+(const CIntN& a, const CIntN& b){
+    CIntN0 sum = a;
     sum += b;
     return sum;
 }
 
-CIntN operator-(const CIntN& a, const CIntN& b){
-    CIntN dif = a;
+CIntN0 operator-(const CIntN& a, const CIntN& b){
+    CIntN0 dif = a;
     dif -= b;
     return dif;
 }

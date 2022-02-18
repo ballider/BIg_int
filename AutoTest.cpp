@@ -5,17 +5,17 @@
 #include "CIntN0.hpp"
 
 bool AutoTest1() {
-	CIntN a = -123;
-    CIntN b = 124;
-    CIntN ans; ans = a + b;
+	CIntN0 a = -123;
+    CIntN0 b = 124;
+    CIntN1 ans; ans = a + b;
 	if (ans.get_N() == 1 ) return 1;
 	else return 0;
 }
 
 bool AutoTest2() {
-	CIntN a = 123; 
-    CIntN b = 125;
-	CIntN ans = a - b;
+	CIntN1 a = 123; 
+    CIntN1 b = 125;
+	CIntN0 ans = a - b;
 	if (ans.get_N() == 1 && ans.get_sign() == '-') return 1;
 	else return 0;
 }
@@ -23,18 +23,18 @@ bool AutoTest2() {
 bool AutoTest3(){
     CIntN1 a = 9831367832;
     CIntN0 b("-23943288028342");
-    CIntN ans = 5;
+    CIntN0 ans = 5;
     ans += b;
     ans += a;
     CIntN** arr = new CIntN*[3];
-    for(size_t i = 0; i < 3; ++i) arr[i] = new CIntN;
-    arr[0] = &a;
-    arr[1] = &b;
-    arr[2] = &ans;
+    arr[0] = new CIntN1; arr[0] = &a;
+    arr[1] = new CIntN0; arr[1] = &b;
+    arr[2] = new CIntN0; arr[2] = &ans;
+    for(size_t i = 0; i < 3; ++i) arr[i]->updateFile("AutoTest.txt");
 
-    for(size_t i = 0; i < 3; ++i) arr[i]->print("AutoTest.txt");
+    for(size_t i = 1; i < 3; ++i) arr[i]->print_to_file();
 
-    std::vector<std::string> answer = {"10", "+", "9831367832", "14 - 23943288028342", "-23933456660505"};
+    std::vector<std::string> answer = {"- 2 3 9 4 3 2 8 8 0 2 8 3 4 2 ", "- 2 3 9 3 3 4 5 6 6 6 0 5 0 5 "};
     size_t i = 0;
 
     std::ifstream inp("AutoTest.txt");

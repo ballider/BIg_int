@@ -24,7 +24,6 @@ int main(){
     while(getline(inp, line)) ++k;
     inp.close();
 
-    std::vector<std::string> file_names;
     CIntN** arr = new CIntN*[k];
 
     inp.open(file);
@@ -35,19 +34,21 @@ int main(){
         inp >> FileName;
         inp >> num;
 
-        if(I == 0){
-            if(i < k) arr[i] = new CIntN0(num);
+        if(I == 0 && i < k){
+            arr[i] = new CIntN0(num);
+            arr[i]->updateFile(FileName);
         }
-        else{
-            if(i < k) arr[i] = new CIntN1(num);
+        if(I == 1 && i < k){
+            arr[i] = new CIntN1(num);
+            arr[i]->updateFile(FileName);
         }
-        file_names.push_back(FileName);
+
         ++i;
     }
     inp.close();
 
     for(size_t j = 0; j < k; ++j){
-        arr[j]->print(file_names[j]);
+        arr[j]->print_to_file();
     }
     
     for(size_t j = 0; j < k; ++j){
